@@ -1,6 +1,7 @@
+// testing consts
 const PI: f64 = 3.0; // this is obv. wrong
 
-// main function is calling functions repesenting the subchapters
+// function is calling functions repesenting the subchapters
 fn main() {
     // 3.1
     println!("Chapter 3.1: variables and mutability\n");
@@ -13,12 +14,21 @@ fn main() {
     println!("----------");
 
     // 3.3
-    println!("Chapter 3.3: data types\n");
-
+    println!("Chapter 3.3: functions\n");
+    println!("calling function \"five()\": {}", five());
+    println!("calling function \"plus_one(22)\": {}", plus_one(22));
     println!("----------");
 
-    // function for chapter 3.1: variables and mutability
+    // 3.5
+    println!("Chapter 3.5: control flow\n");
+    println!("calling function \"testing_if()\": {}", testing_if());
+    println!("calling function \"testing_match()\": {}", testing_match());
+    println!("calling function \"testing_for()\"");
+    testing_for();
+    println!("----------");
 }
+
+// function for chapter 3.1
 fn variables() {
     // testing how immutable variables work
     let mut x = 5;
@@ -47,4 +57,38 @@ fn data_types() {
     let foo: [f32; 10] = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
     let foo = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
     println!("foo: {}", foo[9]);
+}
+
+// function for chapter 3.3: functions
+fn five() -> i32 {
+    5
+}
+
+// function for chapter 3.3: functions
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+
+// functon for chapter 3.5: control flow
+fn testing_if() -> i32 {
+    let condition = true;
+    let number = if condition { 5 } else { 10 };
+    number
+}
+
+// function for chapter 3.5: control flow
+fn testing_match() -> i32 {
+    let condition = true;
+    match condition {
+        true => 10,
+        false => 20,
+    }
+}
+
+// function for chapter 3.5: control flow
+fn testing_for() {
+    let a = [10, 20, 30, 40, 50];
+    for number in a.iter() {
+        println!("{}", number);
+    }
 }
