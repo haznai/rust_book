@@ -24,12 +24,25 @@ fn main() {
     let mut s = String::from("hello");
     {
         let r1 = &mut s;
+        //s.push_str("original_ref"); // does not compile
+        r1.push_str("r1_ref");
     } // r1 goes out of scope here, so we can make a new
-      // mutrable reference with no problems
-
-    let r2 = &mut s;
+      // mutrable reference with no problem
+    println!("printing s: {}\n", s);
+    let _r2 = &mut s;
     //let r3 = &mut s; // this won't compile
     //println!("{}, {}", r2, r3);
+
+    // working with immutable references
+    let mut s = String::from("hello");
+    let r1 = &s;
+    let r2 = &s;
+    let r3 = &s;
+    let r4 = &s;
+    let r5 = &s;
+    //s.push_str(" World!"); // this won't work
+    println!("{}, {}, {}, {}, {}", r1, r2, r3, r4, r5);
+    s.push_str(" World!"); // this does work
 }
 
 // this function takes the ownership of a string
