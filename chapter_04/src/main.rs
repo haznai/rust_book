@@ -1,3 +1,5 @@
+use std::str;
+
 fn main() {
     println!("\nchapter 4\n");
 
@@ -35,6 +37,7 @@ fn main() {
 
     // working with immutable references
     let mut s = String::from("hello");
+    // scope of s ends here, because it's not called
     let r1 = &s;
     let r2 = &s;
     let r3 = &s;
@@ -42,7 +45,14 @@ fn main() {
     let r5 = &s;
     //s.push_str(" World!"); // this won't work
     println!("{}, {}, {}, {}, {}", r1, r2, r3, r4, r5);
+    // scope of r[1-5] variables end here
     s.push_str(" World!"); // this does work
+
+    // slices
+    let s = String::from("hello world");
+    println!("\nexclusive slice &s[0..4]: {}", &s[0..4]);
+    println!("inclusive slice &s[0..=4]: {}", &s[0..=4]);
+    println!("result of \"first_word(&s)\": {}", first_word(&s));
 }
 
 // this function takes the ownership of a string
@@ -51,6 +61,19 @@ fn takes_ownership(_example_string: String) {
 }
 
 // this function takes the reference of a string, not the ownership
-fn takes_reference(s: &String) -> usize {
+fn takes_reference(s: &str) -> usize {
     s.len()
+}
+
+// this function takes the string and returns the slice
+fn first_word(s: &str) -> &str {
+    // transform into bytes so iterating(?) is easier
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+
+    &s
 }
